@@ -42,7 +42,6 @@ class TodoList extends React.Component {
     />
   ))
  
-    // let todoItems = this.props.entries
     return (
       <section>
        <ul>
