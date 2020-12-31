@@ -77,7 +77,7 @@ class App extends React.Component {
          <input class="task-input-element" type="text" placeholder="add your todo" 
           onKeyPress={this.addTodo}>
          </input>
-         <button type="submit" >Add</button>
+         <button type="submit" className="add-btn" >Add</button>
        </div>
        <TodoList
         entries={this.state.todo}
