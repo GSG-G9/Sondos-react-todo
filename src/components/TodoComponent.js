@@ -1,6 +1,7 @@
 import React from 'react'
 import pic from '../pencil.png'
 import rubber from '../rubber.png'
+import checkMark from '../check.png'
 
 class Todo extends React.Component{
   constructor(props){
@@ -18,19 +19,30 @@ class Todo extends React.Component{
     }
 
     const view =(
-      <li >{this.props.taskText}
-     
-       <div className="edit-img-container">
-         <img src={rubber} alt="delete" className='edit-img'
-           onClick={()=> this.props.deleteTask(this.props.id)}>
-         </img>
-       </div>
-       <button>complete</button>
-       <div className="edit-img-container">
-         <img src={pic} className='edit-img' alt="edit"
-           onClick={()=>this.props.setEditing(true)}>
-         </img>
-       </div>
+      <li className="list-item">
+        <span  style={{
+          textDecoration: this.props.complete
+            ? 'line-through'
+            : 'none',
+         }} className="task-text" > {this.props.taskText}
+         </span>
+         <div className="img-container todo-element">
+           <img src={checkMark} alt="done" className='edit-img'
+             onClick={()=>this.props.setIsCompleted(this.props.id,true)}
+             onDoubleClick={()=>this.props.setIsCompleted(this.props.id,false)}>
+           </img>
+         </div>
+         <div className="img-container todo-element">
+           <img src={rubber} alt="delete" className='edit-img'
+             onClick={()=> this.props.deleteTask(this.props.id)}>
+           </img>
+         </div>
+         
+         <div className="img-container todo-element">
+           <img src={pic} className='edit-img' alt="edit"
+             onClick={()=>this.props.setEditing(true)}>
+           </img>
+         </div>
       </li>
     )
   
@@ -47,7 +59,8 @@ class Todo extends React.Component{
     )
 
     return (
-    <div>
+  
+    <div >
       {this.props.isEditing ? edit : view}
     </div>
     )

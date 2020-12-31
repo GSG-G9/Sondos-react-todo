@@ -47,15 +47,23 @@ class App extends React.Component {
      this.setState({
        todo : newList,
      })
-
    }
 
    setIsEditing = (boolean) =>{
      this.setState({isEditing: boolean})
    }
 
-   setIsCompleted = (id) =>{
-     
+   setIsCompleted = (id, boolean) =>{
+    const newList = this.state.todo.map((item)=>{
+      if(id=== item.key){
+        return {...item, isCompleted:boolean}
+      }
+      return item;
+    })
+    this.setState({
+      todo : newList,
+    })
+    console.log("dooone",this.state)
    }
 
 
@@ -63,18 +71,21 @@ class App extends React.Component {
     
     return (
      <div className="App">
-       <header className="App-header">Todo List</header>
-       <h1>My todo lits</h1>
-       <input type="text" placeholder="add your todo" 
-        onKeyPress={this.addTodo}>
-       </input>
-       <button type="submit" >Add</button>
+       <header className="App-header"></header>
+       <h1 class="centering">My todo lits</h1>
+       <div className="task-input">
+         <input class="task-input-element" type="text" placeholder="add your todo" 
+          onKeyPress={this.addTodo}>
+         </input>
+         <button type="submit" >Add</button>
+       </div>
        <TodoList
         entries={this.state.todo}
         delete={this.removeItem}
         edit={this.editItem}
         isEditing={this.state.isEditing}
         SetIsEditing={this.setIsEditing}
+        setIsCompleted={this.setIsCompleted}
        />
      </div>
     )
