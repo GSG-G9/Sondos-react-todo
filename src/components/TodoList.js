@@ -20,6 +20,10 @@ class TodoList extends React.Component {
     this.props.SetIsEditing(boolean)
   }
 
+  setIsCompleted = (key, boolean) => {
+    this.props.setIsCompleted(key, boolean)
+  }
+
 
 
   render() {
@@ -34,6 +38,7 @@ class TodoList extends React.Component {
     editTask={this.edit}
     isEditing={this.props.isEditing}
     setEditing={this.SetIsEditing}
+    setIsCompleted={this.setIsCompleted}
     />
   ))
  
@@ -42,15 +47,6 @@ class TodoList extends React.Component {
       <section>
        <ul>
          {TodoItems}
-         {/* {todoItems.map((todo,index) => (
-         <li key={todo.key}>{todo.task}
-          <button onClick={()=> this.delete(todo.key)}>delete</button>
-          <button>complete</button>
-          <div class="edit-img-container">
-            <img src={pic} id='edit-img' alt="edit"onClick={this.edit}></img>
-          </div>
-         </li>
-         ))} */}
        </ul> 
       </section>
     )
