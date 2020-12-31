@@ -7,12 +7,12 @@ class App extends React.Component {
 
   state ={
     todo :[],
+    isEditing :false
   }
  
   addTodo = (event)=>{
     if (event.key === 'Enter'){
       if(event.target.value !== ""){
-        console.log(event.target.value)
         let taskDetails = {
           task : event.target.value,
           isCompleted : false,
@@ -24,13 +24,11 @@ class App extends React.Component {
             todo: prev.todo.concat(taskDetails),
           }
         })
-        console.log('hiii', this.state)
       }
     }
   }
 
   removeItem = (id) => {
-    console.log(id)
     const newList = this.state.todo.filter((item)=>item.key !== id)
     this.setState((prev)=>{
       return {
@@ -39,17 +37,45 @@ class App extends React.Component {
     })
    }
 
+   editItem = (id, editedTask) => {
+     const newList = this.state.todo.map((item)=>{
+       if(id=== item.key){
+         return {...item, task:editedTask}
+       }
+       return item;
+     })
+     this.setState({
+       todo : newList,
+     })
+
+   }
+
+   setIsEditing = (boolean) =>{
+     this.setState({isEditing: boolean})
+   }
+
+   setIsCompleted = (id) =>{
+     
+   }
+
+
   render() {
-    const todoList = this.state.todo
+    
     return (
      <div className="App">
        <header className="App-header">Todo List</header>
        <h1>My todo lits</h1>
        <input type="text" placeholder="add your todo" 
-       // onBlur={this.setTodo}
-       onKeyPress={this.addTodo}></input>
+        onKeyPress={this.addTodo}>
+       </input>
        <button type="submit" >Add</button>
-       <TodoList entries={this.state.todo} delete={this.removeItem}/>
+       <TodoList
+        entries={this.state.todo}
+        delete={this.removeItem}
+        edit={this.editItem}
+        isEditing={this.state.isEditing}
+        SetIsEditing={this.setIsEditing}
+       />
      </div>
     )
   }

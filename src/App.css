@@ -37,11 +37,11 @@
 
 .edit-img-container{
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
 }
 
-#edit-img{
+.edit-img{
   max-width:100%
 
 }
